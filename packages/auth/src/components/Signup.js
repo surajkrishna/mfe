@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -49,9 +49,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp({ onSignIn, setGlobalStore }) {
   const classes = useStyles();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
   const onSignInButton = () => {
     onSignIn();
-    setGlobalStore({ user: "Suraj Krishna" });
+    const fullName = `${firstName} ${lastName}`;
+    setGlobalStore({ user: fullName });
   };
   return (
     <Container component="main" maxWidth="xs">
@@ -78,6 +82,8 @@ export default function SignUp({ onSignIn, setGlobalStore }) {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -89,6 +95,8 @@ export default function SignUp({ onSignIn, setGlobalStore }) {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>

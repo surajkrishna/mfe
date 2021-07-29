@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -52,10 +52,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn({ onSignIn, setGlobalStore }) {
   const classes = useStyles();
+  const [myEmail, setEmail] = useState("suraj@gmail.com");
 
   const onSignInButton = () => {
     onSignIn();
-    setGlobalStore({ user: "Suraj Krishna" });
+    setGlobalStore({ user: myEmail });
   };
 
   return (
@@ -75,6 +76,8 @@ export default function SignIn({ onSignIn, setGlobalStore }) {
           <TextField
             variant="outlined"
             margin="normal"
+            value={myEmail}
+            onChange={(e) => setEmail(e.target.value)}
             required
             fullWidth
             id="email"
